@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
 
-    padding: 15,
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   text: {
     color: '#2e78b7'

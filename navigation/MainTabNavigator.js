@@ -5,8 +5,11 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 
 import PlanScreen from "../screens/PlanScreen"
+import PlanFormScreen from "../screens/PlanFormScreen"
+
 import ActivityScreen from "../screens/ActivityScreen"
 import StatsScreen from "../screens/StatsScreen"
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -17,7 +20,8 @@ const config = Platform.select({
 
 const PlanStack = createStackNavigator(
   {
-    Plan: PlanScreen,
+    PlanList: PlanScreen,
+    AddPlan: PlanFormScreen,
   },
   config
 );

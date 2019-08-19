@@ -14,6 +14,10 @@ import PlanBar from '../components/PlanBar'
 import { Plans } from '../mocks/PlanMocks'
 
 function PlanList({ plans, count }) {
+  if (!plans) {
+    return <Text>No plans found :(</Text>
+  }
+
   return (
     <View>
       {plans.map((plan, idx) => <PlanBar key={`${plan.id}${idx}`} plan={plan}/>)}
@@ -21,7 +25,11 @@ function PlanList({ plans, count }) {
   )
 }
 
-export default function PlanScreen() {
+export default function PlanScreen({ navigation }) {
+  onActionButtonPress = () => {
+    navigation.navigate('AddPlan')
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -37,15 +45,16 @@ export default function PlanScreen() {
             style={styles.welcomeImage}
           />
         </View>
-
+  
         <View style={styles.planListContainer}>
           <MonoText style={[styles.getStartedText, styles.codeHighlightContainer]}>My plans</MonoText>
           <PlanList plans={Plans.plans} count={Plans.count}/>
         </View>
+
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
-        <ActionButton buttonColor="rgba(231,76,60,1)" onPress={() => console.log('Pressed')} />
+        <ActionButton buttonColor="rgba(231,76,60,1)" onPress={onActionButtonPress} />
       </View>
     </View>
   );
@@ -59,6 +68,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  planListContainer: {
+    flex: 1,
+    padding: 15,
   },
   contentContainer: {
     paddingTop: 30,
