@@ -12,6 +12,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@davlis/is-disabled": "file:./utils/IsDisabled/",
     "@davlis/registry": "file:./utils/Registry",
     "@expo/samples": "~3.0.3",
     "@expo/vector-icons": "^10.0.3",

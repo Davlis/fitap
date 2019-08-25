@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TextInput, Text, Alert, StyleSheet } from 'react-native'; 
 import { FontAwesome } from '@expo/vector-icons';
+import isDisabled from '@davlis/is-disabled'
 
 import * as yup from 'yup'
 import { Formik } from 'formik'
@@ -32,7 +33,6 @@ export default function PlanFormSection({ onSubmit, values }) {
       initialValues={isEmpty(values) ? defaultValues : values}
       validationSchema={validationSchema}
       enableReinitialize={true}
-      isInitialValid={true}
       onSubmit={values => onSubmit(values)}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -70,8 +70,7 @@ export default function PlanFormSection({ onSubmit, values }) {
           <View style={styles.btnContainer}>
             <Button
               title="Next     "
-              // type="outline"
-              disabled={(touched.name || touched.purpose || touched.difficulty) && !isValid}
+              disabled={isDisabled(errors, touched)}
               onPress={handleSubmit}
               icon={
                 <FontAwesome

@@ -1,7 +1,7 @@
 const sleep = ms => new Promise((resolve) => setTimeout(resolve, ms))
 
 function createClientMock(options = {}) {
-  const timeout = options.timeout || 1
+  const timeout = options.timeout || 3000
 
   const mock = async (url, options) => {
     console.log(`Client :: Performing request to ${url} with options = ${JSON.stringify(options)}`)
