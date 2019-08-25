@@ -65,98 +65,123 @@ const createExcersiseInputs = ({
 export default function TrainingFormSection({ onSubmit, onFinish, onBack, values, isLoading }) {
   const initialValues = isEmpty(values) ? defaultValues : values
 
+  const _createOnBackHandler = (values) => {
+    return () => {
+      const dirty = Object.values(values).some(v => !!v)
+
+      if (!dirty) {
+        onBack()
+      }
+
+      if (dirty) {
+        Alert.alert(
+          'Warning',
+          'You may lose information about current training plan',
+          [
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+            { text: 'Continue', onPress: () => onBack() },
+          ],
+          { cancelable: false },
+        );
+      }
+    }
+  }
+
   return (
-  <Formik
-    initialValues={initialValues}
-    validationSchema={validationSchema}
-    enableReinitialize={true}
-    isInitialValid={({ initialValues }) => validationSchema.isValidSync(initialValues) }
-    onSubmit={values => onSubmit(values)}
-  >
-    {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
-      <View style={styles.container}>
-        <Input
-          value={values.name}
-          onChangeText={handleChange('name')}
-          onBlur={() => setFieldTouched('name')}
-          placeholder="Name"
-        />
-        {touched.name && errors.name &&
-          <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
-        }
-
-        <Input
-          value={values.date}
-          onChangeText={handleChange('date')}
-          onBlur={() => setFieldTouched('date')}
-          placeholder="Date"
-        />
-        {touched.date && errors.date &&
-          <Text style={{ fontSize: 10, color: 'red' }}>{errors.date}</Text>
-        }
-
-        <Input
-          value={values.interval}
-          onChangeText={handleChange('interval')}
-          onBlur={() => setFieldTouched('interval')}
-          placeholder="Interval"
-        />
-        {touched.interval && errors.interval &&
-          <Text style={{ fontSize: 10, color: 'red' }}>{errors.interval}</Text>
-        }
-
-        {createExcersiseInputs({ 
-          values, 
-          handleChange, 
-          errors, 
-          setFieldTouched, 
-          touched, 
-          isValid, 
-          handleSubmit 
-        })}
-
-        <View style={styles.nextBtnContainer}>
-          <Button
-            title="Next     "
-            disabled={isLoading || isDisabled(errors, touched)}
-            onPress={handleSubmit}
-            icon={
-              <FontAwesome
-                name="arrow-right"
-                size={18}
-                color="white"
-              />
-            }
-            iconRight
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      enableReinitialize={true}
+      isInitialValid={({ initialValues }) => validationSchema.isValidSync(initialValues) }
+      onSubmit={values => onSubmit(values)}
+    >
+      {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
+        <View style={styles.container}>
+          <Input
+            value={values.name}
+            onChangeText={handleChange('name')}
+            onBlur={() => setFieldTouched('name')}
+            placeholder="Name"
           />
-        </View>
+          {touched.name && errors.name &&
+            <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
+          }
 
-        <View style={styles.finishBtnContainer}>
-          <Button 
-            title="Save & Finish"
-            disabled={isLoading || !isValid}
-            onPress={() => onFinish(values)}
+          <Input
+            value={values.date}
+            onChangeText={handleChange('date')}
+            onBlur={() => setFieldTouched('date')}
+            placeholder="Date"
           />
-        </View>
+          {touched.date && errors.date &&
+            <Text style={{ fontSize: 10, color: 'red' }}>{errors.date}</Text>
+          }
 
-        <View style={styles.finishBtnContainer}>
-          <Button
-              title="     Back"
-              disabled={isLoading}
-              onPress={onBack}
+          <Input
+            value={values.interval}
+            onChangeText={handleChange('interval')}
+            onBlur={() => setFieldTouched('interval')}
+            placeholder="Interval"
+          />
+          {touched.interval && errors.interval &&
+            <Text style={{ fontSize: 10, color: 'red' }}>{errors.interval}</Text>
+          }
+
+          {createExcersiseInputs({ 
+            values, 
+            handleChange, 
+            errors, 
+            setFieldTouched, 
+            touched, 
+            isValid, 
+            handleSubmit 
+          })}
+
+          <View style={styles.nextBtnContainer}>
+            <Button
+              title="Next     "
+              disabled={isLoading || isDisabled(errors, touched)}
+              onPress={handleSubmit}
               icon={
                 <FontAwesome
-                  name="arrow-left"
+                  name="arrow-right"
                   size={18}
                   color="white"
                 />
               }
+              iconRight
             />
-        </View>
+          </View>
 
-      </View>
-    )}
-  </Formik>
+          <View style={styles.finishBtnContainer}>
+            <Button 
+              title="Save & Finish"
+              disabled={isLoading || !isValid}
+              onPress={() => onFinish(values)}
+            />
+          </View>
+
+          <View style={styles.finishBtnContainer}>
+            <Button
+                title="     Back"
+                disabled={isLoading}
+                onPress={_createOnBackHandler(values)}
+                icon={
+                  <FontAwesome
+                    name="arrow-left"
+                    size={18}
+                    color="white"
+                  />
+                }
+              />
+          </View>
+
+        </View>
+      )}
+    </Formik>
   );
 }
 
