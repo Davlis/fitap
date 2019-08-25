@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  ActivityIndicator,
   Image,
   ScrollView,
   StyleSheet,
@@ -11,7 +12,7 @@ import ActionButton from 'react-native-action-button';
 import { MonoText } from '../components/StyledText';
 import PlanBar from '../components/PlanBar'
 
-import { Plans } from '../mocks/PlanMocks'
+import { Plans } from '../__mocks__/PlanMocks'
 
 function PlanList({ plans, count }) {
   if (!plans) {

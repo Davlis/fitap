@@ -40,9 +40,11 @@ const defaultValues = {
   excersise_5: '',
 }
 
-const createExcersiseInputs = () => {
+const createExcersiseInputs = ({
+  values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit
+}) => {
   const keys = Object.keys(defaultValues)
-  const count = keys.filter(key => key.includes('excersise')).length
+  const count = keys.filter(key => key.includes('excersise'))
 
   const getName = (idx) => `excersise_${idx + 1}`
 
@@ -67,6 +69,7 @@ export default function TrainingFormSection({ onSubmit, onFinish, onBack, values
       initialValues={isEmpty(values) ? defaultValues : values}
       validationSchema={validationSchema}
       enableReinitialize={true}
+      isInitialValid={true}
       onSubmit={values => onSubmit(values)}
     >
       {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -101,7 +104,15 @@ export default function TrainingFormSection({ onSubmit, onFinish, onBack, values
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.interval}</Text>
           }
 
-          {createExcersiseInputs()}
+          {createExcersiseInputs({ 
+            values, 
+            handleChange, 
+            errors, 
+            setFieldTouched, 
+            touched, 
+            isValid, 
+            handleSubmit 
+          })}
 
           <View style={styles.nextBtnContainer}>
             <Button

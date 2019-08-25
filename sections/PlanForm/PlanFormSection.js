@@ -27,10 +27,6 @@ const defaultValues = {
 }
 
 export default function PlanFormSection({ onSubmit, values }) {
-
-  console.log('PlanFormSection.defaultValues', defaultValues)
-  console.log('PlanFormSection.values', values)
-
   return (
     <Formik
       initialValues={isEmpty(values) ? defaultValues : values}

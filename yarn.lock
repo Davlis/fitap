@@ -847,6 +847,9 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@davlis/registry@file:./utils/Registry":
+  version "1.0.0"
+
 "@expo/samples@~3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@expo/samples/-/samples-3.0.3.tgz#83ade8e4d5cae95c257d5a99767eda66ca04f73e"

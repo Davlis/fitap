@@ -7,6 +7,7 @@ import { MonoText } from '../components/StyledText';
 
 import PlanFormSection from '../sections/PlanForm/PlanFormSection'
 import TrainingFormSection from '../sections/PlanForm/TrainingFormSection'
+import Registry from '@davlis/registry'
 
 const STEPS = {
   AddPlanInformation: 0,
@@ -18,35 +19,43 @@ const defaultPayload = {
   trainings: []
 }
 
-export default function PlanFormScreen() {
+export default function PlanFormScreen({ navigation }) {
   const [payload, setPayload] = useState({ ...defaultPayload })
   const [formStep, setFormStep] = useState(STEPS.AddPlanInformation);
 
   handlePlanFormSubmit = (values) => {
-    console.log('handle plan', values)
-
     setPayload({ ...payload, plan: { ...values }})
     setFormStep(formStep + 1)
   }
 
   handleAddNextTrainingStep = (values) => {
-    console.log('handle save & next training', values)
+    const trainings = [ ...payload.trainings ]
+
+    if (trainings[formStep - 1]) {
+      trainings[formStep - 1] = { ...values }
+    } else {
+      trainings.push({ ...values })
+    }
   
-    setPayload({ ...payload, trainings: payload.trainings.concat(values) })
+    setPayload({ ...payload, trainings })
     setFormStep(formStep + 1)
-
-    console.log(payload)
   }
 
-  handleFinish = (values) => {
-    console.log('handle finish', values)
-    // TODO: Call API + Refresh
+  handleFinish = () => {
+    const ApiService = Registry.get('ApiService')
+
+    ApiService.post('/plans', payload)
+      .then(result => {
+        // handle result propagation here
+        console.log('result', result)
+        navigation.navigate('PlanList')
+      }).catch(error => {
+        // handle error here
+        console.log('error', error)
+      })
   }
 
-  handleBack = (values) => {
-    console.log('handle back', values)
-    console.log('hadnle back payload', payload)
-
+  handleBack = () => {
     setFormStep(formStep - 1)
   }
 
