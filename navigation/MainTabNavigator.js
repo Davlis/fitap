@@ -3,24 +3,30 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+
+import PlanScreen from "../screens/PlanScreen"
+import PlanFormScreen from "../screens/PlanFormScreen"
+
+import ActivityScreen from "../screens/ActivityScreen"
+import StatsScreen from "../screens/StatsScreen"
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+// *** //
+
+const PlanStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    PlanList: PlanScreen,
+    AddPlan: PlanFormScreen,
   },
   config
 );
-
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+PlanStack.navigationOptions = {
+  tabBarLabel: 'Plans',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -32,45 +38,48 @@ HomeStack.navigationOptions = {
     />
   ),
 };
+PlanStack.path = '';
 
-HomeStack.path = '';
+// *** //
 
-const LinksStack = createStackNavigator(
+const ActivitesStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Activities: ActivityScreen,
   },
   config
 );
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+ActivitesStack.navigationOptions = {
+  tabBarLabel: 'Activites',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
+ActivitesStack.path = '';
 
-LinksStack.path = '';
+// *** //
 
-const SettingsStack = createStackNavigator(
+const StatsStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Stats: StatsScreen,
   },
   config
 );
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+StatsStack.navigationOptions = {
+  tabBarLabel: 'Statistics',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
+StatsStack.path = '';
 
-SettingsStack.path = '';
+// *** //
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  PlanStack,
+  ActivitesStack,
+  StatsStack,
+}, {
+  initialRouteName: 'PlanStack' // ActivitesStack
 });
 
 tabNavigator.path = '';

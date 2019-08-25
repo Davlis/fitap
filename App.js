@@ -6,8 +6,11 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+import bootstrap from "./bootstrap"
 
 export default function App(props) {
+  bootstrap()
+
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
