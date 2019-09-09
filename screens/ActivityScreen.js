@@ -1,16 +1,41 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 
-export default function ActivityScreen() {
+export default function ActivityScreen({ navigation }) {
+  onActivityStartClick = () => {
+    navigation.navigate('StartActivity')
+  }
+
+  onRecentActivitiesClick = () => {
+    navigation.navigate('RecentActivities')
+  }
+
   return (
-    <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}>
+        <View style={styles.wrapper}>
+          <View style={styles.actionBtnContainer}>
+            <Button
+              title="Start Activity"
+              onPress={onActivityStartClick}
+            />
+          </View>
+          <View style={styles.actionBtnContainer}>
+            <Button
+              title="Recent Activities"
+              onPress={onRecentActivitiesClick}
+            />
+          </View>          
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -21,7 +46,25 @@ ActivityScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#fff',
   },
+  contentContainer: {
+    width: '100%',
+    height: '100%',
+    paddingTop: 30,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingBottom: 30
+  },
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  actionBtnContainer: {
+    flex: 1,
+    marginRight: 5,
+    marginLeft: 5
+  }
 });

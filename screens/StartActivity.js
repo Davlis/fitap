@@ -1,3 +1,6 @@
+// TODO: Use react-native-collapsible library
+// https://github.com/oblador/react-native-collapsible
+
 import React, { useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, View } from 'react-native';
 import Registry from '@davlis/registry'
@@ -97,7 +100,7 @@ export default function PlanFormScreen({ navigation }) {
 }
 
 PlanFormScreen.navigationOptions = {
-  title: 'Create plan',
+  title: 'Start Activity',
 };
 
 const styles = StyleSheet.create({

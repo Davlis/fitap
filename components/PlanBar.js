@@ -4,8 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  Button
+  TouchableOpacity
 } from 'react-native';
 
 function PlanBar({ plan, handlePlanClick = () => { console.log('Default click') } }) {
