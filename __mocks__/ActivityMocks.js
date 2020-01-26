@@ -9,8 +9,8 @@ const LastActivities = {
     count: 2,
     activities: [{
       id: 'activity-1',
-      trainingId: 'training-1',
-      planId: 'plan-1',
+      trainingId: 'training-1', // Note: Should training name be passed as well ?
+      planId: 'plan-1', // Note: Should plan name be passed as well ?
       excersises: {
         count: 3,
         excersises: [{

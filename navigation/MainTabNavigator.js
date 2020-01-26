@@ -8,6 +8,9 @@ import PlanScreen from "../screens/PlanScreen"
 import PlanFormScreen from "../screens/PlanFormScreen"
 
 import ActivityScreen from "../screens/ActivityScreen"
+import RecentActivitiesScreen from "../screens/RecentActivites"
+import StartActivityScreen from "../screens/StartActivity"
+
 import StatsScreen from "../screens/StatsScreen"
 
 
@@ -45,6 +48,8 @@ PlanStack.path = '';
 const ActivitesStack = createStackNavigator(
   {
     Activities: ActivityScreen,
+    RecentActivities: RecentActivitiesScreen,
+    StartActivity: StartActivityScreen
   },
   config
 );
@@ -79,7 +84,7 @@ const tabNavigator = createBottomTabNavigator({
   ActivitesStack,
   StatsStack,
 }, {
-  initialRouteName: 'PlanStack' // ActivitesStack
+  initialRouteName: 'ActivitesStack'
 });
 
 tabNavigator.path = '';
