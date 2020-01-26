@@ -20,7 +20,8 @@ const defaultPayload = {
   trainings: []
 }
 
-export default function PlanFormScreen({ navigation }) {
+// Note: Mockked screen for now
+export default function ActivityFormScreen({ navigation }) {
   const [payload, setPayload] = useState({ ...defaultPayload })
   const [formStep, setFormStep] = useState(STEPS.AddPlanInformation);
 
@@ -75,7 +76,7 @@ export default function PlanFormScreen({ navigation }) {
 
   const FormContent = (props) => formStep === STEPS.AddPlanInformation ? 
     <View style={styles.formContainer}>
-      <MonoText style={styles.title}>Plan basic information</MonoText>
+      <MonoText style={styles.title}>Activity information (WIP)</MonoText>
       <PlanFormSection 
         onSubmit={handlePlanFormSubmit}
         values={ {...payload.plan} }
@@ -99,7 +100,7 @@ export default function PlanFormScreen({ navigation }) {
   );
 }
 
-PlanFormScreen.navigationOptions = {
+ActivityFormScreen.navigationOptions = {
   title: 'Start Activity',
 };
 
