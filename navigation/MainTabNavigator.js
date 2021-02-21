@@ -13,6 +13,7 @@ import StartActivityScreen from "../screens/StartActivity"
 
 import StatsScreen from "../screens/StatsScreen"
 
+import MeasurmentScreen from "../screens/MeasurmentScreen"
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -56,10 +57,26 @@ const ActivitesStack = createStackNavigator(
 ActivitesStack.navigationOptions = {
   tabBarLabel: 'Activites',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-flash' : 'md-flash'} />
   ),
 };
 ActivitesStack.path = '';
+
+// *** //
+
+const MeasurmentStack = createStackNavigator(
+  {
+    Stats: MeasurmentScreen,
+  },
+  config
+);
+MeasurmentStack.navigationOptions = {
+  tabBarLabel: 'Measurments',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-body' : 'md-body'} />
+  ),
+};
+MeasurmentStack.path = ''; 
 
 // *** //
 
@@ -72,7 +89,7 @@ const StatsStack = createStackNavigator(
 StatsStack.navigationOptions = {
   tabBarLabel: 'Statistics',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-trophy' : 'md-trophy'} />
   ),
 };
 StatsStack.path = '';
@@ -82,7 +99,8 @@ StatsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   PlanStack,
   ActivitesStack,
-  StatsStack,
+  MeasurmentStack,
+  StatsStack
 }, {
   initialRouteName: 'ActivitesStack'
 });
